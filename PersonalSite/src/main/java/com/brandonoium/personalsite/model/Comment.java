@@ -10,6 +10,7 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name="COMMENTS")
 public class Comment {
 	
 	@Id
@@ -17,13 +18,13 @@ public class Comment {
 	private long id;
 	
 	@OneToOne
-	@JoinTable(name = "comment_user", joinColumns = @JoinColumn(name = "comment_id"),
-								inverseJoinColumns = @JoinColumn(name = "user_id"))
+	//@JoinTable(name = "COMMENT_USER", joinColumns = @JoinColumn(name = "COMMENT_ID"),
+	//							inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	private User user;
 	
 	@OneToOne
-	@JoinTable(name = "comment_post", joinColumns = @JoinColumn(name = "comment_id"),
-								inverseJoinColumns = @JoinColumn(name = "post_id"))
+	//@JoinTable(name = "COMMENT_POST", joinColumns = @JoinColumn(name = "COMMENT_ID"),
+	//							inverseJoinColumns = @JoinColumn(name = "POST_ID"))
 	private Post post;
 	
 	private Date timedate;

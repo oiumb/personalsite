@@ -10,6 +10,7 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name="POSTS")
 public class Post {
 	
 	@Id
@@ -17,8 +18,8 @@ public class Post {
 	private long id;
 	
 	@OneToOne
-	@JoinTable(name = "post_user", joinColumns = @JoinColumn(name = "post_id"),
-								inverseJoinColumns = @JoinColumn(name = "user_id"))
+	//@JoinTable(name = "post_user", joinColumns = @JoinColumn(name = "post_id"),
+	//							inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private User user;
 	
 	private Date timedate;
