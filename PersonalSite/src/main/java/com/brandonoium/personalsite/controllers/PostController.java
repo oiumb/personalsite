@@ -26,7 +26,7 @@ public class PostController {
 	}
 	
 	
-	@GetMapping("/posts")
+	@GetMapping(value="/posts", produces="application/json")
 	public Resources<Resource<Post>> all() {
 		
 		List<Resource<Post>> posts = new ArrayList<Resource<Post>>();
@@ -38,7 +38,7 @@ public class PostController {
 		return new Resources<Resource<Post>>(posts);
 	}
 	
-	@GetMapping("/posts/{id}")
+	@GetMapping(value="/posts/{id}", produces="application/json")
 	public Resource<Post> one(@PathVariable long id) {
 		
 		Post p = postRepo.findById(id).get();

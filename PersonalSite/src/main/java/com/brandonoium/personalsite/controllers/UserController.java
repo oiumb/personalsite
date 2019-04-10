@@ -26,7 +26,7 @@ public class UserController {
 	}
 	
 	
-	@GetMapping("/users")
+	@GetMapping(value="/users", produces="application/json")
 	public Resources<Resource<User>> all() {
 		
 		List<Resource<User>> users = new ArrayList<Resource<User>>();
@@ -38,7 +38,7 @@ public class UserController {
 		return new Resources<Resource<User>>(users);
 	}
 	
-	@GetMapping("/users/{id}")
+	@GetMapping(value="/users/{id}", produces="application/json")
 	public Resource<User> one(@PathVariable long id) {
 		
 		User u = userRepo.findById(id).get();
