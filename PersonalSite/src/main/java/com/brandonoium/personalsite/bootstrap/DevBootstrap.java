@@ -21,10 +21,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 		
 		System.out.println("Running bootstrap...");
 		
-		User tmp = new User(1, "Pyro");
+		User tmp = new User(1, "Pyro", "");
 		userRepo.save(tmp);
 		
-		tmp = new User(2, "B-Rand");
+		tmp = new User(2, "B-Rand", "");
 		userRepo.save(tmp);
 	}
 

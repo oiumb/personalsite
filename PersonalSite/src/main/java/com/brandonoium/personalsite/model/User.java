@@ -16,14 +16,16 @@ public class User {
 	private long id;
 	
 	private String username;
+	private String passwdHash;
+
+	public User(long id, String username, String passwdHash) {
+		this.id = id;
+		this.username = username;
+		this.passwdHash = passwdHash;
+	}
 
 	public User() {
 		
-	}
-	
-	public User(long id, String username) {
-		this.id = id;
-		this.username = username;
 	}
 
 	public long getId() {
@@ -40,5 +42,13 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPasswdHash() {
+		return passwdHash;
+	}
+
+	public void setPasswdHash(String passwdHash) {
+		this.passwdHash = passwdHash;
 	}
 }
