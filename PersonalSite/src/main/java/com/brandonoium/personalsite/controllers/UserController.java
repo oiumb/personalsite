@@ -16,17 +16,20 @@ import com.brandonoium.personalsite.exceptions.UserNotFoundException;
 import com.brandonoium.personalsite.model.User;
 import com.brandonoium.personalsite.repositories.UserRepository;
 import com.brandonoium.personalsite.resourceassemblers.UserResourceAssembler;
+import com.brandonoium.personalsite.security.PasswordEncryptionService;
 
 @RestController
 public class UserController {
 
 	private UserRepository userRepo;
 	private UserResourceAssembler assembler;
+	private PasswordEncryptionService encoder;
 	
-	public UserController(UserRepository userRepo, UserResourceAssembler assembler) {
+	public UserController(UserRepository userRepo, UserResourceAssembler assembler, PasswordEncryptionService encoder) {
 		super();
 		this.userRepo = userRepo;
 		this.assembler = assembler;
+		this.encoder = encoder;
 	}
 	
 	
@@ -44,7 +47,13 @@ public class UserController {
 	
 	@PostMapping(value="/users", produces="application/json")
 	Resource<User> newUser(@RequestBody User newUser) {
-		return assembler.toResource(userRepo.save(newUser));
+		User u = new User();
+		
+		u.setUsername(newUser.getUsername());
+		u.setPasswdHash(encoder.encode(newUser.getPasswdHash()));
+		u.setRole("USER");
+		
+		return assembler.toResource(userRepo.save(u));
 	}
 	
 	@GetMapping(value="/users/{id}", produces="application/json")

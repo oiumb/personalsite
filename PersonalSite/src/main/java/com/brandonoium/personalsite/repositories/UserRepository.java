@@ -8,6 +8,6 @@ import com.brandonoium.personalsite.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	@Query("SELECT u FROM User u WHERE u.username=:username")
-    public Iterable<User> findByUsername(@Param("username") String Username);
+	@Query("SELECT u FROM User u WHERE u.username = :uname")
+    public Iterable<User> findByUsername(@Param("uname") String Username);
 }

@@ -17,11 +17,13 @@ public class User {
 	
 	private String username;
 	private String passwdHash;
+	private String role;
 
-	public User(long id, String username, String passwdHash) {
+	public User(long id, String username, String passwdHash, String role) {
 		this.id = id;
 		this.username = username;
 		this.passwdHash = passwdHash;
+		this.role = role;
 	}
 
 	public User() {
@@ -50,5 +52,13 @@ public class User {
 
 	public void setPasswdHash(String passwdHash) {
 		this.passwdHash = passwdHash;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

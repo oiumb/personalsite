@@ -1,15 +1,12 @@
 package com.brandonoium.personalsite.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
@@ -18,19 +15,20 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 	
 
 	@Autowired
-    AuthenticationEntryPoint restAuthenticationEntryPoint;
+    private AuthenticationEntryPoint restAuthenticationEntryPoint;
+	
+	@Autowired
+	private PasswordEncryptionService encoder;
+	
+	@Autowired
+	private UserAuthenticationProvider authProvider;
 
 	@Override
 	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-		.withUser("admin").password(encoder().encode("adminpass")).roles("ADMIN")
-		.and()
-		.withUser("user").password(encoder().encode("userpass")).roles("USER");
-	}
-	
-	@Bean
-	public PasswordEncoder encoder() {
-		return new BCryptPasswordEncoder();
+		auth.authenticationProvider(authProvider);
+		//.withUser("admin").password(encoder.encode("adminpass")).authorities("ROLE_ADMIN")
+		//.and()
+		//.withUser("user").password(encoder.encode("userpass")).authorities("ROLE_USER");
 	}
 	
 	@Override
